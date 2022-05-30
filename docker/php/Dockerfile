@@ -5,7 +5,10 @@ RUN  apt-get update \
   && apt-get install -y wget \
   && apt-get install unzip \
   && apt-get install libaio1 \
-  && rm -rf /var/lib/apt/lists/* \
+  && apt-get install -y nodejs npm yarn \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient_21_6/
 # Install Oracle Instantclient
