@@ -1,0 +1,12 @@
+FROM nginx:1.19-alpine
+
+WORKDIR /var/www/html/
+
+COPY . /var/www/html
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx/sites/ /etc/nginx/sites-available
+COPY ./docker/nginx/conf.d-qa/ /etc/nginx/conf.d
+
+CMD ["nginx"]
+
+EXPOSE 80
