@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <app-register :roles='{{ roles|json_encode() }}' :url="'{{ path('app_register') }}'" ></app-register>
+{% endblock %}

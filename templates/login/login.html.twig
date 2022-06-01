@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error.message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+    <nav>
+        <h1 class="mx-5 my-3">Workflow</h1>
+    </nav>
+    <main class=" text-center form-signin w-100 m-auto">
+        <form method="post" action="{{ path('app_login') }}">
+            <h1 class="text-start h3 mt-5 mb-3 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input name="_username" type="text" class="form-control mb-1" id="username" placeholder="Username">
+                <label for="username">Username</label>
+            </div>
+            <div class="form-floating">
+                <input name="_password" type="password" class="form-control" id="password" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <div class="text-start checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me" checked> Remember me
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <p class="text-start mt-2 mb-3 text-muted">Workflow &copy;{{ 'now' | date('Y') }}</p>
+        </form>
+    </main>
+{% endblock %}

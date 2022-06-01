@@ -4,23 +4,36 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
-    const SITE_MANAGER = 'ROLE-SITE_MANAGER';
-    const SITE_ENGINEER = 'ROLE-SITE_ENGINEER';
-    const QS = 'ROLE-QS';
-    const PROJECT_MANAGER = 'ROLE-PROJECT_MANAGER';
-    const GM_ENGINEERING = 'ROLE-GM_ENGINEERING';
-    const GM_SUPPLY_CHAIN = 'ROLE-GM_SUPPLY_CHAIN';
-    const PROCUREMENT_MANAGER = 'ROLE-PROCUREMENT_MANAGER';
-    const ADMIN = 'ROLE-ADMIN';
-    const AUDITOR = 'ROLE-AUDITOR';
+    const SITE_ENGINEER = 'ROLE_SITE_ENGINEER';
+    const SITE_MANAGER = 'ROLE_SITE_MANAGER';
+    const QS = 'ROLE_QS';
+    const PROJECT_MANAGER = 'ROLE_PROJECT_MANAGER';
+    const GM_ENGINEERING = 'ROLE_GM_ENGINEERING';
+    const GM_SUPPLY_CHAIN = 'ROLE_GM_SUPPLY_CHAIN';
+    const PROCUREMENT_MANAGER = 'ROLE_PROCUREMENT_MANAGER';
+    const AUDITOR = 'ROLE_AUDITOR';
+    const ADMIN = 'ROLE_ADMIN';
+    const ROLES = [
+        "Site Engineer" => self::SITE_ENGINEER,
+        "Site Manager" => self::SITE_MANAGER,
+        "QS" => self::QS,
+        "Project Manager" => self::PROJECT_MANAGER,
+        "GM Engineering" => self::GM_ENGINEERING,
+        "GM Supply Chain" => self::GM_SUPPLY_CHAIN,
+        "Procurement Manager" => self::PROCUREMENT_MANAGER,
+        "Auditor" => self::AUDITOR,
+        "Admin" => self::ADMIN,
+    ];
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,6 +51,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private string $password;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+    #[ORM\Column(type: 'string', length: 30)]
+    private $firstName;
+
+    #[ORM\Column(type: 'string', length: 30)]
+    private $lastName;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $phone;
+
+    #[ORM\Column(type: 'smallint')]
+    private $sex;
 
     public function getId(): ?int
     {
@@ -123,6 +151,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getSex(): ?int
+    {
+        return $this->sex;
+    }
+
+    public function setSex(int $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
     }
 
 }

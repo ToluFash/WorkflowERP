@@ -38,5 +38,10 @@ RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/in
        && docker-php-ext-enable \
                oci8
 
+# Install MongoDB extension
+RUN apt-get update && apt-get install -y autoconf build-essential
+RUN pecl install mongodb
+RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+
 # Install XDebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug

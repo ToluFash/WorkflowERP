@@ -17,9 +17,11 @@ import { createApp } from 'vue'
 // start the Stimulus application
 import './bootstrap';
 import AppDashboard from './pages/app-dashboard'
+import AppRegister from './pages/app-register'
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 const app = createApp({
 })
 app.component('AppDashboard', AppDashboard)
+app.component('AppRegister', AppRegister)
 app.mount('#app');

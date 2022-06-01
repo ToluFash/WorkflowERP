@@ -11,7 +11,7 @@ class AppController extends AbstractController
     #[Route('/app', name: 'app_workflow')]
     public function index(): Response
     {
-        return $this->render('app/index.html.twig', [
+        return $this->render('app/login.html.twig', [
             'controller_name' => 'AppController',
         ]);
     }
