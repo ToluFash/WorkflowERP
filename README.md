@@ -19,3 +19,6 @@ ERP application to manage workflow in construction sites.
 1. `docker-compose run --rm php bash "-c" "cd /var/www/html && ./bin/console cache:pool:clear cache.global_clearer" && docker-compose run --rm php bash "-c" "cd /var/www/html && composer clearcache"`
 # If company database is not created automatically
 1. `docker-compose run --rm php bash "-c" "cd /var/www/html && ./bin/console d:d:c"`
+
+# Run tests
+1. `docker-compose run --rm php bash "-c" "cd /var/www/html && ./bin/phpunit"`

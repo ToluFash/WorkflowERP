@@ -45,6 +45,7 @@ services:
     ports:
       - "6379"
   mongo:
+    container_name: workflow-mongo
     image: mongo
     restart: always
     environment:
@@ -57,6 +58,7 @@ services:
       - ./database/mongodb/dev.archive:/Databases/dev.archive
       - ./database/mongodb/production:/Databases/production
   mongo-express:
+    container_name: workflow-mongo-express
     image: mongo-express
     restart: always
     ports:
